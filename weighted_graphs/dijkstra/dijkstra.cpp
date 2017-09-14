@@ -12,9 +12,10 @@ void shortestPath (const vector<int>& parents, vector<int>* path, int current, i
   }
 }
 
-vector<int> Dijkstra(const vector<vector<Node>>& graph, int source, int destination) {
+int Dijkstra(const vector<vector<Node>>& graph, int source, int destination) {
   //shortest distance of all vertices from source
   vector<int> distances(graph.size(), numeric_limits<int>::max());
+  //parent of each vertex in the shortest path
   vector<int> parents(graph.size(), -1);
   priority_queue<Node, vector<Node>, greater<Node>> unknown;
 
@@ -45,22 +46,17 @@ vector<int> Dijkstra(const vector<vector<Node>>& graph, int source, int destinat
     }
   }
   vector<int> shortest_path;
-  for (auto x : parents) cout << x << " ";
-  cout << endl;
-  for (auto x : distances) cout << x << " ";
   shortestPath (parents, &shortest_path, destination, source);
-  return shortest_path;
+  for (int vertex : shortest_path) cout << vertex << " ";
+  cout << "\n";
+  return distances[destination];
 }
 
 
 int main(void) {
   ifstream ifs( "../common/undirected_weighted_graph.txt" );
-  if (!ifs)
-    {
-      cout << "open fail 1" << endl;
-    }
+  if (!ifs) throw runtime_error("graph not defined!");
 
   auto graph = buildGraph(ifs);
-  auto shortest_path = Dijkstra(graph, 0, 8);
-  for (int vertex : shortest_path) cout << vertex << " ";
+  cout << Dijkstra(graph, 0, 8);
 }
