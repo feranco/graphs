@@ -14,17 +14,26 @@ void dfs(const vector<vector<Edge>>& graph, int vertex, vector<bool>* processed,
     if (!(*processed)[edge.vertex]) dfs(graph, edge.vertex, processed, dfs_vertices);
   }
   (*processed)[vertex] = true;
+  //visit vertex
   dfs_vertices->emplace_back(vertex);
 }
 
-vector<int> dfs(const vector<vector<Edge>>& graph) {
-  //stack containing vertex topologically sorted
+vector<int> dfs(const vector<vector<Edge>>& graph, int start) {
+  //vector containing vertices visited by dfs
   vector<int> dfs_vertices;
   //flag indicating already processed vertex
   vector<bool> processed(graph.size(),false);
 
-  for (int i = 0; i < graph.size(); ++i) {
-    if (!processed[i]) dfs(graph, i, &processed, &dfs_vertices);
+  if (start < 0) {
+    //visit all vertices: this demonstrate that topological
+    //sorting is the reverse of dfs visit
+    for (int i = 0; i < graph.size(); ++i) {
+      if (!processed[i]) dfs(graph, i, &processed, &dfs_vertices);
+    }
+  }
+  else {
+    //perform dfs from the starting vertex
+    dfs(graph, start, &processed, &dfs_vertices);
   }
 
   //output dfs output
