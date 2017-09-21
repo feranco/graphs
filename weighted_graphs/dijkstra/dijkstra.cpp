@@ -1,3 +1,6 @@
+//O(Elog(V)) in the worst case all E edges are processed and each
+//insertion in the priority queue is performed in O(log(E)) time
+//but  O(log(E)) =  O(log(V))
 #include "../common/defs.h"
 #include <iostream>
 #include <limits>
