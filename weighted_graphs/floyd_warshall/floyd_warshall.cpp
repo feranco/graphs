@@ -31,8 +31,7 @@ vector<vector<int>> floydWarshall (const vector<vector<Node>>& graph) {
 }
 
 int main(void) {
-  //ifstream ifs( "../common/all_pairs_graph.txt" );
-  ifstream ifs( "all_pairs_graph.txt" );
+  ifstream ifs( "../common/all_pairs_graph.txt" );
   if (!ifs) throw runtime_error("graph not defined!");
 
   auto graph = buildGraph(ifs);
