@@ -19,7 +19,7 @@ void dfs(const vector<vector<Edge>>& graph, int vertex, vector<bool>* discovered
     //explore the end vertex if not previously discovered
     if (!(*discovered)[edge.vertex]) {
       (*parents)[edge.vertex] = vertex;
-      dfs(graph, edge.vertex, discovered, dfs_vertices);
+      dfs(graph, edge.vertex, discovered, dfs_vertices, parents);
     }
   }
 }
