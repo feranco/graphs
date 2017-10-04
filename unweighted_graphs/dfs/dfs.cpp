@@ -45,6 +45,6 @@ int main(void) {
   if (!ifs) throw runtime_error("graph not defined!");
     
   auto graph = buildGraph(ifs);
-  auto dfs_vertices = dfs(graph);
+  auto dfs_vertices = dfs(graph,0);
   for (int vertex : dfs_vertices) cout << vertex << " ";
 }
