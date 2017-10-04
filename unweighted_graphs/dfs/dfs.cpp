@@ -8,32 +8,35 @@
 
 using namespace std;
 
-void dfs(const vector<vector<Edge>>& graph, int vertex, vector<bool>* processed, vector<int>* dfs_vertices) {
-
-  for (const auto& edge : graph[vertex]) {
-    if (!(*processed)[edge.vertex]) dfs(graph, edge.vertex, processed, dfs_vertices);
-  }
-  (*processed)[vertex] = true;
+void dfs(const vector<vector<Edge>>& graph, int vertex, vector<bool>* discovered, vector<int>* dfs_vertices) {
+  //mark current vertex as discovered
+  (*discovered)[vertex] = true;
   //visit vertex
   dfs_vertices->emplace_back(vertex);
+  
+  //cycle on (outgoing) edges of current
+  for (const auto& edge : graph[vertex]) {
+    //explore the end vertex if not previously discovered
+    if (!(*discovered)[edge.vertex]) dfs(graph, edge.vertex, discovered, dfs_vertices);
+  }
 }
 
 vector<int> dfs(const vector<vector<Edge>>& graph, int start) {
   //vector containing vertices visited by dfs
   vector<int> dfs_vertices;
   //flag indicating already processed vertex
-  vector<bool> processed(graph.size(),false);
+  vector<bool> discovered(graph.size(),false);
 
   if (start < 0) {
     //visit all vertices: this demonstrate that topological
     //sorting is the reverse of dfs visit
     for (int i = 0; i < graph.size(); ++i) {
-      if (!processed[i]) dfs(graph, i, &processed, &dfs_vertices);
+      if (!discovered[i]) dfs(graph, i, &discovered, &dfs_vertices);
     }
   }
   else {
     //perform dfs from the starting vertex
-    dfs(graph, start, &processed, &dfs_vertices);
+    dfs(graph, start, &discovered, &dfs_vertices);
   }
 
   //output dfs output
