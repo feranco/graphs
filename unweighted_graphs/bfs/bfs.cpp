@@ -1,4 +1,5 @@
 //breadth first search implementation
+//mark as discovered before push in the queue
 //O(V + E)
 
 #include "../common/defs.h"
@@ -13,25 +14,27 @@ vector<int> bfs(const vector<vector<Edge>>& graph, int start) {
   //vector contain vertices visited by bfs
   vector<int> bfs_vertices;
   
-  //flag indicating already processed vertex
-  vector<bool> processed(graph.size(),false);
+  //flag indicating already discovered vertex
+  vector<bool> discovered(graph.size(),false);
 
   //queue containing vertices not already processed
   queue<int> bfs_queue;
-  processed[start] = true;
+  discovered[start] = true;
   bfs_queue.push(start);
   
 
   while (!bfs_queue.empty()) {
     int current_vertex = bfs_queue.front();
     bfs_queue.pop();
+    //visit current vertex
     bfs_vertices.emplace_back(current_vertex);
-
+    
+    //cycle on (outgoing) edges of current vertex
     for (const auto& edge : graph[current_vertex]) {
-      if (!processed[edge.vertex]) {
+      if (!discovered[edge.vertex]) {
 	//it's important to mark a vertex as processed before
 	//to enqueue it, so that the queue has not duplicates
-	processed[edge.vertex] = true;
+	discovered[edge.vertex] = true;
 	bfs_queue.emplace(edge.vertex);
       }
     }
