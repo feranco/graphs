@@ -28,7 +28,7 @@ vector<int> dfs(const vector<vector<Edge>>& graph, int start) {
   //vector containing vertices visited by dfs
   vector<int> dfs_vertices;
   //parents
-  vector<int> parents;
+  vector<int> parents(graph.size(),false);
   //flag indicating already processed vertex
   vector<bool> discovered(graph.size(),false);
 
