@@ -1,4 +1,5 @@
 //deep first search implementation
+//marked as discovered when pop from the stack
 //O(V + E)
 
 #include "../common/defs.h"
