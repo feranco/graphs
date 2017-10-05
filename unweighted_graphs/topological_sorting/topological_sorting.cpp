@@ -18,15 +18,16 @@ using namespace std;
 void topologicalSorting(const vector<vector<Edge>>& graph, int vertex, vector<bool>* discovered, stack<int>* sorted) {
   (*discovered)[vertex] = true;
   for (const auto& edge : graph[vertex]) {
-    if (!(*discovered)[edge.vertex]) topologicalSorting(graph, edge.vertex, processed, sorted);
-  } 
+    if (!(*discovered)[edge.vertex]) topologicalSorting(graph, edge.vertex, discovered, sorted);
+  }
+  //push the current vertex into the stack only when it has been processed
   sorted->emplace(vertex);
 }
 
 vector<int> topologicalSorting(const vector<vector<Edge>>& graph) {
   //stack containing vertex topologically sorted
   stack<int> sorted;
-  //flag indicating already processed vertex
+  //flag indicating already discovered vertex
   vector<bool> discovered(graph.size(),false);
 
   for (int i = 0; i < graph.size(); ++i) {
