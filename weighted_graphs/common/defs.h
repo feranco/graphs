@@ -14,7 +14,7 @@ struct Node {
   }
   //for bst shortest path
   bool operator< (const Node& rhs) const {
-    return (lhs < rhs.weight);
+    return (weight < rhs.weight);
   }
 };
 
