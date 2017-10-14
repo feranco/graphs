@@ -8,8 +8,13 @@ struct Node {
   int vertex;
   int weight;
   Node(int x, int y) : vertex(x), weight(y) {}
+  //for pq shortest path
   bool operator> (const Node& rhs) const {
     return (weight > rhs.weight);
+  }
+  //for bst shortest path
+  bool operator<= (const Node& rhs) const {
+    return (weight <= rhs.weight);
   }
 };
 
