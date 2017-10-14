@@ -20,7 +20,7 @@ int Dijkstra(const vector<vector<Node>>& graph, int source, int destination) {
   vector<int> distances(graph.size(), numeric_limits<int>::max());
   //parent of each vertex in the shortest path
   vector<int> parents(graph.size(), -1);
-  set<Node> unknown;
+  set<Node,Comp> unknown;
 
   distances[source] = 0;
   unknown.emplace(source,0);
