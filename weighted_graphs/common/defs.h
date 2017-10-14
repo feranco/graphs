@@ -18,13 +18,6 @@ struct Node {
   }
 };
 
-struct Comp {
-  //for bst shortest path
-  bool operator() (const Node& lhs, const Node& rhs) const {
-    return (lhs.weight <= rhs.weight);
-  }
-};
-
 vector<vector<Node>> buildGraph(ifstream& ifs) {
   int n_vertex;
   bool directed;
