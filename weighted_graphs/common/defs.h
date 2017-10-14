@@ -12,9 +12,12 @@ struct Node {
   bool operator> (const Node& rhs) const {
     return (weight > rhs.weight);
   }
+};
+
+struct Comp {
   //for bst shortest path
-  bool operator<= (const Node& rhs) const {
-    return (weight <= rhs.weight);
+  bool operator() (const Node& lhs, const Node& rhs) const {
+    return (lhs.weight <= rhs.weight);
   }
 };
 
