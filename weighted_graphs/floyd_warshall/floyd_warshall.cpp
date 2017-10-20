@@ -20,7 +20,9 @@ vector<vector<int>> floydWarshall (const vector<vector<Node>>& graph) {
       distances[i][graph[i][j].vertex] = graph[i][j].weight;
     }
   } 
-	
+  
+  /* For each vertex k, try to add k to the shortest path 
+  between each couple of vertices (i,j) */
   for (int k = 0; k < distances.size(); ++k) {
     for (int i = 0; i < distances.size(); ++i) {
       for (int j = 0; j < distances.size(); ++j)
