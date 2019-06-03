@@ -65,13 +65,19 @@ bool howMany (const vector<vector<int>>& graph, int product, Consumers label, ve
   return true;
 }
 
+
+// Basically this problem ask to check if the graph is bipartite and to find its different coloring
+// If the graph is bipartite and connected there are only 2 symmetricx different coloring
+// If the graph is bipartite and there are several connected components the number of coloring is 2^k where k is the number of connected copmponents
+// If the graph is not bipartite return -1
 long int howMany (const vector<vector<int>>& graph) {
   vector<bool> processed_products(graph.size(), false);
-  vector<Consumers> product_labels(graph.size(), Consumers::None);;
+  vector<Consumers> product_labels(graph.size(), Consumers::None);
   int combinations = 0;
 
   for (int i = 0; i < graph.size(); ++i) {
     if (!processed_products[i]) {
+      //if one connected component is not bipartite return -1
       if (!howMany(graph, i, Consumers::Adults, &processed_products, &product_labels)) return -1;
       ++combinations;
     }
